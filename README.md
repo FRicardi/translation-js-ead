@@ -5,7 +5,7 @@ Somos alunos da Universidade Do Vale do Rio dos Sinos e este trabalho foi feito 
 
 ## Como utilizar?
 ### Configuração
-Primeiramente, você deve criar um arquivo dicionário. Por convenção, o nomeie de `dicionario.dat`. O formato do arquivo deve ser o seguinte:
+Primeiramente, você deve criar um arquivo dicionário. Por convenção, o nomeie de `dicionario.dat`. O formato do arquivo deve ser o seguinte:<br>
 `<palavra_ingles>#<traducao1>#<traducao2>#<traducaoN>`
 ### Tradução
 Você poderá digitar qualquer palavra buscando sua tradução. Caso o nosso _maravilhoso_ tradutor não a encontre, você terá a opção de nos ajudar a crescer a base de dados digitando as traduções que você conhece para aquela palavra.
@@ -18,5 +18,5 @@ O sistema lhe retornará:
 Contudo, se você digitar a palavra *`Boogaloo`*, o sistema não terá traduções disponíveis. Aí você pode entrar com uma nova tradução, por exemplo *`Balacobaco`*
 
 ## Autores
-Felipe Ricardi <fricardi@edu.unisinos.br>
-João Dacol Soares <joaodacolsoares@edu.unisinos.br>
+Felipe Ricardi <fricardi@edu.unisinos.br> <br>
+João Dacol Soares <joaodacolsoares@edu.unisinos.br> <br>
