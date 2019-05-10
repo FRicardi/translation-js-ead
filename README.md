@@ -14,7 +14,7 @@ O sistema lhe retornará:
 - Dinheiro
 - Moeda
 - Fortuna
-- Riquezas
+- Riquezas<br>
 Contudo, se você digitar a palavra *`Boogaloo`*, o sistema não terá traduções disponíveis. Aí você pode entrar com uma nova tradução, por exemplo *`Balacobaco`*
 
 ## Autores
