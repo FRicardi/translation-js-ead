@@ -1,14 +1,14 @@
 /**
  * Attributes:
  * @param { String } word A word in english
- * @param { List } definitions A list that will store portuguese translations of the word
+ * @param { LinkedList } definitions A list that will store portuguese translations of the word
  */
 class Dictionary {
 
     /**
      * Instatiate class Dictionary initial values
      * @param { String } word 
-     * @param { List } definitions 
+     * @param { LinkedList } definitions 
      */
     constructor (word, definitions) {
         this.setWord(word);
@@ -39,7 +39,7 @@ class Dictionary {
 
     /**
      * Set new definitions
-     * @param { List } definitions 
+     * @param { LinkedList } definitions 
      */
     set setDefinitions(definitions) {
         this.definitions = definitions;

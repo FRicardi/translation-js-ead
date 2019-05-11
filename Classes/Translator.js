@@ -23,7 +23,7 @@ class Translator {
     /**
      * Insert a new dictionary in the AVL tree. 
      * @param { String } word 
-     * @param { List } definitions 
+     * @param { LinkedList } definitions 
      */
     insertTranslation(word, definitions) {
 
