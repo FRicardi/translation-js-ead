@@ -1,0 +1,24 @@
+{
+  "name": "translation-js-ead",
+  "version": "1.0.0",
+  "description": "A project to Advanced Data Structures I - UNISINOS",
+  "main": "server.js",
+  "dependencies": {
+    "readline-sync": "^1.4.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FRicardi/translation-js-ead.git"
+  },
+  "author": "Felipe Ricardi <fricardi@edu.unisinos.br>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FRicardi/translation-js-ead/issues"
+  },
+  "homepage": "https://github.com/FRicardi/translation-js-ead#readme"
+}
