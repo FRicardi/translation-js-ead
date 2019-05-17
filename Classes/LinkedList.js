@@ -1,3 +1,4 @@
+const Node = require('./Node')
 /**
  * Implementation of a linked list to store the dictionary
  */
@@ -135,3 +136,5 @@ class LinkedList
         this.head = null;
     }
 }
+
+module.exports = LinkedList

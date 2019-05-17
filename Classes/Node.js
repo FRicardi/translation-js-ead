@@ -3,7 +3,7 @@
  * @param { * } data payload to a node
  * @param { Node } next the next node on the list
  */
-class Node{
+class Node {
     
     /**
      * Instatiate class Dictionary initial values
@@ -16,3 +16,5 @@ class Node{
     }
     
 }
+
+module.exports = Node

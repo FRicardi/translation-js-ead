@@ -16,3 +16,5 @@ class AVLNode {
     }
 
 }
+
+module.exports = AVLNode
