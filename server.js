@@ -12,10 +12,16 @@ const AVL = require('./Classes/AVL')
 const avl = new AVL();
 
 avl.insert({ word: 'Chair' })
+avl.insert({ word: 'Art' })
 avl.insert({ word: 'Docker' })
 avl.insert({ word: 'Basketball' })
-avl.insert({ word: 'Art' })
 avl.insert({ word: 'Ethics' })
 avl.insert({ word: 'Flamengo' })
+avl.insert({ word: '1' })
+avl.insert({ word: '5' })
 
 avl.readInOrder()
+
+const height = avl.height;
+
+console.log({ height })
