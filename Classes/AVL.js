@@ -16,13 +16,13 @@ class AVL {
     set setTreeRoot(node) {
         this.root = node;
     }
+    
     /**
      * 
      * @param { Dictionary } data 
      */
     insert(data) {
         const node = new AVLNode(data);
-        
         const treeRoot = this.getTreeRoot;
 
         if (treeRoot === null) {
@@ -30,11 +30,10 @@ class AVL {
             this.setTreeRoot = node;
             return;
         }
-
-        if (treeRoot.data.word > node.data.word) {
+        if (treeRoot.data.dictionary.word > node.data.dictionary.word) {
             console.log('Node data lesser than root data');
             treeRoot.left = this.insertImpl(treeRoot.left, node);
-        } else if (treeRoot.data.word < node.data.word ) {
+        } else if (treeRoot.data.dictionary.word < node.data.dictionary.word ) {
             console.log('Node data greater than root data')
             treeRoot.right = this.insertImpl(treeRoot.right, node);
         } else {
@@ -50,10 +49,10 @@ class AVL {
 
         if (root === null) {
             root = node;
-        } else if (root.data.word > node.data.word) {
+        } else if (root.data.dictionary.word > node.data.dictionary.word) {
             console.log('Node data lesser than root data');
             root.left = this.insertImpl(root.left, node);
-        } else if (root.data.word < node.data.word) {
+        } else if (root.data.dictionary.word < node.data.dictionary.word) {
             console.log('Node data greater than root data')
             root.right = this.insertImpl(root.right, node);
         } else {
@@ -61,10 +60,6 @@ class AVL {
         }
 
         return root;
-    }
-
-    remove(node) {
-
     }
 
     rightRotation() {
@@ -97,7 +92,7 @@ class AVL {
     readInOrderImpl(root) {
         if (root) {
             this.readInOrderImpl(root.left);
-            console.log({ Word: root.data.word });
+            console.log({ Word: root.data.dictionary.word });
             this.readInOrderImpl(root.right);
         }
         return
