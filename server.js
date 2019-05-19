@@ -7,15 +7,8 @@
 // Showing the word
 // console.log('The word you choose was: ' + word + '!\n');
 
-const AVL = require('./Classes/AVL')
+const Translator = require('./Classes/Translator')
 
-const avl = new AVL();
+const translator = new Translator();
 
-avl.insert({ word: 'Chair' })
-avl.insert({ word: 'Docker' })
-avl.insert({ word: 'Basketball' })
-avl.insert({ word: 'Art' })
-avl.insert({ word: 'Ethics' })
-avl.insert({ word: 'Flamengo' })
-
-avl.readInOrder()
+translator.loadDictionary('./Database/dicionario.dat');
