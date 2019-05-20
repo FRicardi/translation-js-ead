@@ -35,44 +35,70 @@ class AVL {
     }
 
     insertImpl(root, node) {
+        const rootData = !!root ? root.data.dictionary.word : null;
+        const nodeData = node.data.dictionary.word;
+
         if (root === null) {
             root = node;
-        } else if (root.data.dictionary.word > node.data.dictionary.word) {
-            console.log('Node data lesser than root data (left)');
+            console.log(`Node ${nodeData} inserted`);
+        }
+
+        else if (rootData > nodeData) {
+            console.log(`Node ${nodeData} lesser than root ${rootData} (go left)`);
             root.left = this.insertImpl(root.left, node);
-        } else if (root.data.dictionary.word < node.data.dictionary.word) {
-            console.log('Node data greater than root data (right)');
+
+            if (root.left !== null && this.getBalanceFactor(root) > 1) {
+                console.log('Start balancing')
+                // if (node.data > root.left.data) {
+                //     root = this.rotationLL(root);
+                // } else {
+                //     console.log('1')
+                //     root = this.rotationLR(root);
+                // }
+            }
+        }
+
+        else if (rootData < nodeData) {
+            console.log(`Node ${nodeData} greater than root ${rootData} (go right)`);
             root.right = this.insertImpl(root.right, node);
-        } else {
+            // if (root.right !== null && this.getBalanceFactor(root) < -1) {
+            //     if (node.data > root.right.data) {
+            //         root = this.rotationRR(root);
+            //     } else {
+            //         root = this.rotationRL(root);
+            //     }
+            // }
+        }
+
+        else {
             console.log('Node data already inserted');
         }
 
         return root;
     }
 
-    rightRotate(node) {
-        let tmp = node.right;
-        node.right = tmp.left;
-        tmp.left = node;
-        return tmp;
-    }
-
-    leftRotate(node) {
+    rotationLL(node) {
         let tmp = node.left;
         node.left = tmp.right;
         tmp.right = node;
         return tmp;
     }
 
-    rotate(root) {
-        if (root.balanceFactor() > 1) {
-            if (getBalanceFactor(root.left) === -1) leftRotate(root.left);
-            rightRotate(root);
-        }
-        else if (root.balanceFactor() < -1) {
-            if (getBalanceFactor(root.right) === 1) rightRotate(root.right);
-            leftRotate(root);
-        }
+    rotationRR(node) {
+        let tmp = node.right;
+        node.right = tmp.left;
+        tmp.left = node;
+        return tmp;
+    }
+
+    rotationLR(node) {
+        node.left = rotationRR(node.left);
+        return rotationLL(node);
+     }
+
+    rotationRL(node) {
+        node.right = this.rotationLL(node.right);
+        return this.rotationRR(node);
     }
 
     getBalanceFactor(root) {
