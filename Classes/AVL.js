@@ -16,7 +16,7 @@ class AVL {
     set setTreeRoot(node) {
         this.root = node;
     }
-    
+
     /**
      * 
      * @param { Dictionary } data 
@@ -29,31 +29,19 @@ class AVL {
             console.log('Node data inserted to root')
             this.setTreeRoot = node;
             return;
-        }
-        if (treeRoot.data.dictionary.word > node.data.dictionary.word) {
-            console.log('Node data lesser than root data');
-            treeRoot.left = this.insertImpl(treeRoot.left, node);
-        } else if (treeRoot.data.dictionary.word < node.data.dictionary.word ) {
-            console.log('Node data greater than root data')
-            treeRoot.right = this.insertImpl(treeRoot.right, node);
         } else {
-            console.log('Node data already inserted');
+            this.insertImpl(treeRoot, node)
         }
-
-        this.setTreeRoot = treeRoot
-        // console.log({ treeRoot })
-
     }
- 
-    insertImpl(root, node) {
 
+    insertImpl(root, node) {
         if (root === null) {
             root = node;
         } else if (root.data.dictionary.word > node.data.dictionary.word) {
-            console.log('Node data lesser than root data');
+            console.log('Node data lesser than root data (left)');
             root.left = this.insertImpl(root.left, node);
         } else if (root.data.dictionary.word < node.data.dictionary.word) {
-            console.log('Node data greater than root data')
+            console.log('Node data greater than root data (right)');
             root.right = this.insertImpl(root.right, node);
         } else {
             console.log('Node data already inserted');
@@ -62,27 +50,46 @@ class AVL {
         return root;
     }
 
-    rightRotation() {
-
-    } 
-
-    doubleRightRotation() {
-
+    rightRotate(node) {
+        let tmp = node.right;
+        node.right = tmp.left;
+        tmp.left = node;
+        return tmp;
     }
 
-    leftRotation() {
-
+    leftRotate(node) {
+        let tmp = node.left;
+        node.left = tmp.right;
+        tmp.right = node;
+        return tmp;
     }
 
-    doubleLeftRotation() {
-
+    rotate(root) {
+        if (root.balanceFactor() > 1) {
+            if (getBalanceFactor(root.left) === -1) leftRotate(root.left);
+            rightRotate(root);
+        }
+        else if (root.balanceFactor() < -1) {
+            if (getBalanceFactor(root.right) === 1) rightRotate(root.right);
+            leftRotate(root);
+        }
     }
 
-    get height() {
-
+    getBalanceFactor(root) {
+        return this.getHeight(root.left) - this.getHeight(root.right);
     }
 
-    balanceFactor() {        
+    getHeight(root) {
+        let height = 0;
+        if (root === null || typeof root == "undefined") {
+            height = -1;
+        } else {
+            height = Math.max(this.getHeight(root.left), this.getHeight(root.right)) + 1;
+        }
+        return height;
+    }
+
+    balanceFactor() {
     }
 
     readInOrder() {
