@@ -7,8 +7,14 @@
 // Showing the word
 // console.log('The word you choose was: ' + word + '!\n');
 
+const LinkedList = require('./Classes/LinkedList')
 const Translator = require('./Classes/Translator')
 
 const translator = new Translator();
 
 translator.loadDictionary('./Database/dicionario.dat');
+
+const linkedList = new LinkedList();
+linkedList.insertAtEnd('água')
+
+translator.insertTranslation('water', linkedList)

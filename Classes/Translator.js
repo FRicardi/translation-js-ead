@@ -55,7 +55,8 @@ class Translator {
      * @param { LinkedList } definitions 
      */
     insertTranslation(word, definitions) {
-
+        const dictionary = new Dictionary(word, definitions);
+        this.avl.insert({dictionary})
     }
 
     /**
