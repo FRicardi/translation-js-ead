@@ -89,9 +89,6 @@ class AVL {
         return height;
     }
 
-    balanceFactor() {
-    }
-
     readInOrder() {
         this.readInOrderImpl(this.root)
     }
