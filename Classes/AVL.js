@@ -127,6 +127,24 @@ class AVL {
         }
         return
     }
+
+    findDefinitionsByWord (word) {
+        return this.findDefinitionImpl(this.root,word);
+    }
+
+    findDefinitionImpl(root,word) {
+        if(root){
+            if(root.data.dictionary.word == word)
+                return root.data.dictionary.definitions;
+            else if(root.data.dictionary.word < word)
+                this.findDefinitionImpl(root.left, word);
+            else if(root.data.dictionary.word > word)
+                this.findDefinitionImpl(root.right, word);
+        }
+        else {
+            return null
+        }
+    }
 }
 
 module.exports = AVL
