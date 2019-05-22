@@ -35,10 +35,6 @@ class Translator {
             const dictionary = new Dictionary(words[0],linkedList);
             this.avl.insert({dictionary})
         });
-
-        setTimeout(() => {
-            this.avl.readInOrder();
-        }, 500)
     }
 
     /**
@@ -46,7 +42,14 @@ class Translator {
      * @param { String } word 
      */
     translateWord(word) {
-
+        const definitions = this.avl.findDefinitionsByWord(word);
+        if(definitions){
+            console.log("Traduções: {")
+            for (let i = 0; i < definitions.getListSize; i++) {
+                console.log("  " + i + " - " + definitions.getAt(i).data)
+            }
+            console.log("}")
+        }
     }
 
     /**

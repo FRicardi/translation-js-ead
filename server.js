@@ -18,3 +18,7 @@ const linkedList = new LinkedList();
 linkedList.insertAtEnd('água')
 
 translator.insertTranslation('water', linkedList)
+
+setTimeout(()=> {
+    translator.translateWord('water')
+}, 1000)
