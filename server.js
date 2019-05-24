@@ -22,7 +22,24 @@ translator.loadDictionary('./Database/dicionario.dat').then(() => {
 
 // Aqui começa o programa, chamando a função de traduzir a
 function main() {
-    console.log('Ready.')
+    console.log('Howdy Sheriff! Are you ready to know how to speak english?')
+console.log("        ___")
+console.log("     __|___|__")
+console.log("      ('o_o')")
+console.log("      _\\~-~/_    ______.")
+console.log("     //\\__/\\ \\ ~(_]---'")
+console.log("    / )O  O( .\\/_)")
+console.log("    \\ \\    / \\_/")
+console.log("    )/_|  |_\\")
+console.log("   \/\/ /(\\/)\ \\")
+console.log("   /_/      \_\\")
+console.log("  (_||      ||_)")
+console.log("    \\| |__| |/")
+console.log("     | |  | |")
+console.log("     | |  | |")
+console.log("     |_|  |_|")
+console.log("     /_\\  /_\\")
+
     translateWord()
 }
 

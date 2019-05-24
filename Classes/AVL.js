@@ -53,14 +53,14 @@ class AVL {
                 if (node.data.dictionary.word > root.left.data.dictionary.word) {
                     root = this.leftRotation(root);
                 }
-             }
+            }
         }
-
+        
         else if (rootData < nodeData) {
             root.right = this.insertImpl(root.right, node);
-
+            
             if (root.right !== null && this.getBalanceFactor(root) < -1) {
-                if (node.data.dictionary.word > root.right.data.dictionary.word) {
+                if (node.data.dictionary.word > root.right.data.dictionary.word) {                
                     root = this.rightRotation(root);
                 } 
              }
@@ -75,20 +75,20 @@ class AVL {
     
     leftRotation(node) {
         let tmp = node.left;
-        node.left = tmp.right;
+        node.left = tmp; 
         tmp.right = node;
         return tmp;
-     }
-     
-     rightRotation(node) {
+    }
+    
+    rightRotation(node) {
         let tmp = node.right;
-        node.right = tmp.left;
+        node.right = tmp;
         tmp.left = node;
         return tmp;
      }
 
     getBalanceFactor(root) {
-        return this.getHeight(root.left) - this.getHeight(root.right);
+        return this.getHeight(root.right) - this.getHeight(root.left);
     }
 
     getHeight(root) {
