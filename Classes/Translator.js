@@ -36,6 +36,7 @@ class Translator {
     
                 const dictionary = new Dictionary(words[0],linkedList);
                 this.avl.insert({dictionary})
+                this.avl.readInOrder();
             }).on('close', function(line) {
                 console.log('Finished loading.')
                 resolve()
