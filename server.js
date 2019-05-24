@@ -6,21 +6,29 @@ var rl = require('readline-sync')
 // Showing the word
 // console.log('The word you choose was: ' + word + '!\n')
 
+
+// Aqui nós fazemos a importação das classes
 const LinkedList = require('./Classes/LinkedList')
 const Translator = require('./Classes/Translator')
 
-const translator = new Translator()
+// Aqui nós fazemos a instanciação do Translator
+const translator = new Translator();
 
+// A operação de dar load no dicionário é assincrona então esperamos
+// Depois do load executamos a função main
 translator.loadDictionary('./Database/dicionario.dat').then(() => {
     main()
 })
 
-
+// Aqui começa o programa, chamando a função de traduzir a
 function main() {
     console.log('Ready.')
     translateWord()
 }
 
+// Aqui fazemos a pergunta de qual palavra o usuário deseja traduzir
+// Se ele da uma resposta que temos no .dat respondemos com as correspondentes
+// Caso não, pedimos para ele inserir ou traduzir outra palavra
 function translateWord() {
     var word = rl.question('Type the word you wish to translate:\n')
     translator.translateWord(word.toLowerCase())
@@ -56,8 +64,8 @@ function translateWord() {
     })
 }
 
+// Adiciona a palavra pra o dicionário e pergunta oq fará depois
 async function addWordToDictionary(word) {
-
     const definitions = await setDefinitions(word)
 
     translator.insertTranslation(word, definitions)
@@ -87,16 +95,17 @@ function exit() {
 
 }
 
+// Aqui você insere as definições da palavra até não ter mais nenhuma para sugerir
 function setDefinitions(word) {
 
     return new Promise((resolve) => {
         const definitions = new LinkedList()
         
-        var keep = false
+        let keep = false
         do {
-            var definition = rl.question(`Type a definition for '${word}':\n`)
+            let definition = rl.question(`Type a definition for '${word}':\n`)
             definitions.insertAtEnd(definition)
-            var more = rl.question('You want to add more definitions? (y/N)\n')
+            let more = rl.question('You want to add more definitions? (y/N)\n')
             if (more.toLowerCase() === 'y') {
                 keep = true
             } else {

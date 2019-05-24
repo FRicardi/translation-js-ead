@@ -20,13 +20,13 @@ class Translator {
      * @param { String } file 
      */
     loadDictionary(path) {
+        let that = this;
         return new Promise((resolve, reject) => {
             const readInterface = readline.createInterface({  
                 input: fileSystem.createReadStream(path),
             });
             
             readInterface.on('line', (line) => {
-                console.log('Loading words...')
                 const words = line.split('#');
                 const linkedList = new LinkedList();
     

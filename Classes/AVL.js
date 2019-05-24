@@ -39,35 +39,31 @@ class AVL {
     }
 
     insertImpl(root, node) {
-        const rootData = !!root ? root.data.dictionary.word : null;
         const nodeData = node.data.dictionary.word;
-
+        const rootData = !!root ? root.data.dictionary.word : null;
+        
         if (root === null) {
             root = node;
         }
-
+        
         else if (rootData > nodeData) {
             root.left = this.insertImpl(root.left, node);
 
             if (root.left !== null && this.getBalanceFactor(root) > 1) {
-                // if (node.data > root.left.data) {
-                //     root = this.rotationLL(root);
-                // } else {
-                //     console.log('1')
-                //     root = this.rotationLR(root);
-                // }
-            }
+                if (node.data.dictionary.word > root.left.data.dictionary.word) {
+                    root = this.leftRotation(root);
+                }
+             }
         }
 
         else if (rootData < nodeData) {
             root.right = this.insertImpl(root.right, node);
-            // if (root.right !== null && this.getBalanceFactor(root) < -1) {
-            //     if (node.data > root.right.data) {
-            //         root = this.rotationRR(root);
-            //     } else {
-            //         root = this.rotationRL(root);
-            //     }
-            // }
+
+            if (root.right !== null && this.getBalanceFactor(root) < -1) {
+                if (node.data.dictionary.word > root.right.data.dictionary.word) {
+                    root = this.rightRotation(root);
+                } 
+             }
         }
 
         else {
@@ -76,30 +72,20 @@ class AVL {
 
         return root;
     }
-
-    rotationLL(node) {
+    
+    leftRotation(node) {
         let tmp = node.left;
         node.left = tmp.right;
         tmp.right = node;
         return tmp;
-    }
-
-    rotationRR(node) {
+     }
+     
+     rightRotation(node) {
         let tmp = node.right;
         node.right = tmp.left;
         tmp.left = node;
         return tmp;
-    }
-
-    rotationLR(node) {
-        node.left = rotationRR(node.left);
-        return rotationLL(node);
      }
-
-    rotationRL(node) {
-        node.right = this.rotationLL(node.right);
-        return this.rotationRR(node);
-    }
 
     getBalanceFactor(root) {
         return this.getHeight(root.left) - this.getHeight(root.right);
