@@ -17,7 +17,7 @@ O sistema lhe retornará:
 - Riquezas<br>
 Contudo, se você digitar a palavra *`Boogaloo`*, o sistema não terá traduções disponíveis. Aí você pode entrar com uma nova tradução, por exemplo *`Balacobaco`*
 ### Rodar o projeto
-`npm install`
+`npm install` <br>
 `node server`
 ## Autores
 Felipe Ricardi <fricardi@edu.unisinos.br> <br>
