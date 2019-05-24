@@ -26,7 +26,7 @@ class Dictionary {
      * Set a new value to word
      * @param { String } word
      */
-    set setWord(word) {
+    setWord(word) {
         this.word = word;
     }
 
@@ -41,7 +41,7 @@ class Dictionary {
      * Set new definitions
      * @param { LinkedList } definitions 
      */
-    set setDefinitions(definitions) {
+    setDefinitions(definitions) {
         this.definitions = definitions;
     }
 

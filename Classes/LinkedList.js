@@ -6,6 +6,7 @@ class LinkedList
 {
     constructor () {
         this.head = null;
+        this.length = 0;
     }
 
     /**
@@ -16,6 +17,7 @@ class LinkedList
         let newNode = new Node(data);
         newNode.next = this.head;
         this.head = newNode;
+        this.length++;
         return this.head;
     }
 
@@ -25,6 +27,7 @@ class LinkedList
      */
     insertAtEnd (data) {        
         let newNode = new Node(data);
+        this.length++;
         if(!this.head){
             this.head = newNode;
             return this.head;
@@ -33,8 +36,7 @@ class LinkedList
         while(tail.next !== null){
              tail = tail.next;
         }
-        tail.next = newNode;
-     
+        tail.next = newNode;     
         return this.head;
     }
 
@@ -72,7 +74,8 @@ class LinkedList
         const previous = this.getAt(index - 1);
         let newNode = new Node(data);
         newNode.next = previous.next;
-        previous.next = newNode;       
+        previous.next = newNode;   
+        this.length++;    
         return this.head
     }
     
@@ -83,6 +86,7 @@ class LinkedList
         if(!this.head){
             return;
         }
+        this.length--;
         this.head = this.head.next;
         return this.head;
     } 
@@ -90,7 +94,7 @@ class LinkedList
     /**
      * Delete the last node of the list
      */
-    deleteLastNode = function(){
+    deleteLastNode (){
         if(!this.head){
             return null;
         }
@@ -104,6 +108,7 @@ class LinkedList
            previous = tail;
            tail = tail.next;
        }
+       this.length--;
        previous.next = null;
        return this.head;
     }
@@ -125,6 +130,7 @@ class LinkedList
         if (!previous || !previous.next) {
             return;
         }
+        this.length--;
         previous.next = previous.next.next;     
         return this.head
     }
@@ -134,6 +140,11 @@ class LinkedList
      */
     deleteList (){
         this.head = null;
+        this.length = 0;
+    }
+
+    get getListSize() {
+        return this.length;
     }
 }
 

@@ -16,46 +16,33 @@ class AVL {
     set setTreeRoot(node) {
         this.root = node;
     }
+
     /**
      * 
      * @param { Dictionary } data 
      */
     insert(data) {
         const node = new AVLNode(data);
-        
         const treeRoot = this.getTreeRoot;
 
         if (treeRoot === null) {
-            console.log(`Node data (${node.data.word}) inserted to root`)
+            console.log(`Node data (${node.data.dictionary.word}) inserted to root`)
             this.setTreeRoot = node;
             return;
-        }
-
-        if (treeRoot.data.word > node.data.word) {
-            console.log(`Node word (${node.data.word}) lesser than root word (${treeRoot.data.word})`);
-            treeRoot.left = this.insertImpl(treeRoot.left, node);
-        } else if (treeRoot.data.word < node.data.word ) {
-            console.log(`Node word (${node.data.word}) greater than root data (${treeRoot.data.word})`)
-            treeRoot.right = this.insertImpl(treeRoot.right, node);
         } else {
-            console.log(`Node word (${node.data.word}) already inserted`);
+            this.insertImpl(treeRoot, node)
         }
-
-        // this.setTreeRoot = this.balanceTree(treeRoot);
-
-        this.setTreeRoot = treeRoot;
-
     }
- 
-    insertImpl(root, node) {
 
+    insertImpl(root, node) {
         if (root === null) {
+            console.log(`Node data (${node.data.dictionary.word}) inserted to subtree root`)
             root = node;
-        } else if (root.data.word > node.data.word) {
-            console.log(`Node word (${node.data.word}) lesser than root word (${root.data.word})`);
+        } else if (root.data.dictionary.word > node.data.dictionary.word) {
+            console.log(`Node data lesser than root data (left) ${node.data.dictionary.word}`);
             root.left = this.insertImpl(root.left, node);
-        } else if (root.data.word < node.data.word) {
-            console.log(`Node word (${node.data.word}) greater than root data (${root.data.word})`)
+        } else if (root.data.dictionary.word < node.data.dictionary.word) {
+            console.log(`Node data greater than root data (right) ${node.data.dictionary.word}`);
             root.right = this.insertImpl(root.right, node);
         } else {
             console.log(`Node word (${node.data.word}) already inserted`);
@@ -64,67 +51,46 @@ class AVL {
         return root;
     }
 
-    remove(node) {
-
+    rightRotate(node) {
+        let tmp = node.right;
+        node.right = tmp.left;
+        tmp.left = node;
+        return tmp;
     }
 
-    rightRotation() {
-
-    } 
-
-    doubleRightRotation() {
-
+    leftRotate(node) {
+        let tmp = node.left;
+        node.left = tmp.right;
+        tmp.right = node;
+        return tmp;
     }
 
-    leftRotation() {
-
+    rotate(root) {
+        if (root.balanceFactor() > 1) {
+            if (getBalanceFactor(root.left) === -1) leftRotate(root.left);
+            rightRotate(root);
+        }
+        else if (root.balanceFactor() < -1) {
+            if (getBalanceFactor(root.right) === 1) rightRotate(root.right);
+            leftRotate(root);
+        }
     }
 
-    doubleLeftRotation() {
-
+    getBalanceFactor(root) {
+        return this.getHeight(root.left) - this.getHeight(root.right);
     }
 
-    get height() {
-        const treeRoot = this.getTreeRoot;
-
-        if (!treeRoot) {
-            return 0;
+    getHeight(root) {
+        let height = 0;
+        if (root === null) {
+            height = -1;
+        } else {
+            height = Math.max(this.getHeight(root.left), this.getHeight(root.right)) + 1;
         }
-
-        return 1 + this.getHeight(treeRoot);
-    }
-
-    getHeight(node) {
-
-        console.log(node.data.word)
-
-        if (node === null) {
-            return -1
-        }
-
-        if (node.right === null && node.right === null) {
-            return 0;
-        }
-
-        if (!node.right) {
-            return 1 + this.getHeight(node.left);
-        }
-
-        if(!node.left) {
-            return 1 + this.getHeight(node.right);
-        }
-
-        const rightTotal = this.getHeight(node.right);
-        const leftTotal = this.getHeight(node.left);
-
-        console.log({ rightTotal, leftTotal })
-
-        return rightTotal > leftTotal ? rightTotal : leftTotal;
-    
+        return height;
     }
 
     balanceFactor() {
-
     }
 
     readInOrder() {
@@ -134,7 +100,7 @@ class AVL {
     readInOrderImpl(root) {
         if (root) {
             this.readInOrderImpl(root.left);
-            console.log({ Word: root.data.word });
+            console.log({ Word: root.data.dictionary.word });
             this.readInOrderImpl(root.right);
         }
         return;
