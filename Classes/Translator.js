@@ -20,33 +20,44 @@ class Translator {
      * @param { String } file 
      */
     loadDictionary(path) {
-        const readInterface = readline.createInterface({  
-            input: fileSystem.createReadStream(path),
-        });
-        
-        readInterface.on('line', (line) => {
-            const words = line.split('#');
-            const linkedList = new LinkedList();
-
-            for (let i = 1; i < words.length; i++) {
-                linkedList.insertAtEnd(words[i]);
-            }
-
-            const dictionary = new Dictionary(words[0],linkedList);
-            this.avl.insert({dictionary})
-        });
-
-        setTimeout(() => {
-            this.avl.readInOrder();
-        }, 500)
+        return new Promise((resolve, reject) => {
+            const readInterface = readline.createInterface({  
+                input: fileSystem.createReadStream(path),
+            });
+            
+            readInterface.on('line', (line) => {
+                console.log('Loading words...')
+                const words = line.split('#');
+                const linkedList = new LinkedList();
+    
+                for (let i = 1; i < words.length; i++) {
+                    linkedList.insertAtEnd(words[i]);
+                }
+    
+                const dictionary = new Dictionary(words[0],linkedList);
+                this.avl.insert({dictionary})
+            }).on('close', function(line) {
+                console.log('Finished loading.')
+                resolve()
+            });
+        })
     }
 
     /**
      * Translates the word from english to portuguese
      * @param { String } word 
      */
-    translateWord(word) {
-
+    async translateWord(word) {
+        console.log(`Translating '${word}'`)
+        const definitions = await this.avl.findDefinitionsByWord(word)
+        if(definitions){
+            console.log(`Translations for '${word}':`)
+            for (let i = 0; i < definitions.getListSize; i++) {
+                console.log("  " + i + " - " + definitions.getAt(i).data)
+            }
+        } else {
+            console.log(`Couldn't find any translations for ${word}.`)
+        }
     }
 
     /**
@@ -55,7 +66,8 @@ class Translator {
      * @param { LinkedList } definitions 
      */
     insertTranslation(word, definitions) {
-
+        const dictionary = new Dictionary(word, definitions);
+        this.avl.insert({dictionary})
     }
 
     /**

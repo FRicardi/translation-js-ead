@@ -1,5 +1,4 @@
 const AVLNode = require('./AVLNode')
-
 /**
  * Implementation of a balanced binary tree by the AVL strategy
  */
@@ -26,7 +25,6 @@ class AVL {
         const treeRoot = this.getTreeRoot;
 
         if (treeRoot === null) {
-            console.log(`Node data (${node.data.dictionary.word}) inserted to root`)
             this.setTreeRoot = node;
             return;
         } else {
@@ -35,45 +33,66 @@ class AVL {
     }
 
     insertImpl(root, node) {
+        const rootData = !!root ? root.data.dictionary.word : null;
+        const nodeData = node.data.dictionary.word;
+
         if (root === null) {
-            console.log(`Node data (${node.data.dictionary.word}) inserted to subtree root`)
             root = node;
-        } else if (root.data.dictionary.word > node.data.dictionary.word) {
-            console.log(`Node data lesser than root data (left) ${node.data.dictionary.word}`);
+        }
+
+        else if (rootData > nodeData) {
             root.left = this.insertImpl(root.left, node);
-        } else if (root.data.dictionary.word < node.data.dictionary.word) {
-            console.log(`Node data greater than root data (right) ${node.data.dictionary.word}`);
+
+            if (root.left !== null && this.getBalanceFactor(root) > 1) {
+                // if (node.data > root.left.data) {
+                //     root = this.rotationLL(root);
+                // } else {
+                //     console.log('1')
+                //     root = this.rotationLR(root);
+                // }
+            }
+        }
+
+        else if (rootData < nodeData) {
             root.right = this.insertImpl(root.right, node);
-        } else {
-            console.log(`Node word (${node.data.word}) already inserted`);
+            // if (root.right !== null && this.getBalanceFactor(root) < -1) {
+            //     if (node.data > root.right.data) {
+            //         root = this.rotationRR(root);
+            //     } else {
+            //         root = this.rotationRL(root);
+            //     }
+            // }
+        }
+
+        else {
+            console.log('Node data already inserted');
         }
 
         return root;
     }
 
-    rightRotate(node) {
-        let tmp = node.right;
-        node.right = tmp.left;
-        tmp.left = node;
-        return tmp;
-    }
-
-    leftRotate(node) {
+    rotationLL(node) {
         let tmp = node.left;
         node.left = tmp.right;
         tmp.right = node;
         return tmp;
     }
 
-    rotate(root) {
-        if (root.balanceFactor() > 1) {
-            if (getBalanceFactor(root.left) === -1) leftRotate(root.left);
-            rightRotate(root);
-        }
-        else if (root.balanceFactor() < -1) {
-            if (getBalanceFactor(root.right) === 1) rightRotate(root.right);
-            leftRotate(root);
-        }
+    rotationRR(node) {
+        let tmp = node.right;
+        node.right = tmp.left;
+        tmp.left = node;
+        return tmp;
+    }
+
+    rotationLR(node) {
+        node.left = rotationRR(node.left);
+        return rotationLL(node);
+     }
+
+    rotationRL(node) {
+        node.right = this.rotationLL(node.right);
+        return this.rotationRR(node);
     }
 
     getBalanceFactor(root) {
@@ -90,9 +109,6 @@ class AVL {
         return height;
     }
 
-    balanceFactor() {
-    }
-
     readInOrder() {
         this.readInOrderImpl(this.root)
     }
@@ -104,6 +120,29 @@ class AVL {
             this.readInOrderImpl(root.right);
         }
         return;
+    }
+
+    findDefinitionsByWord (word) {
+        return new Promise((resolve, reject) => {
+            this.findDefinitionImpl(this.root, word, (translations) => {
+                resolve(translations)
+            })
+        })
+    }
+
+    findDefinitionImpl(root, word, callback) {
+        if(root){
+            if(root.data.dictionary.word === word){
+                callback(root.data.dictionary.definitions)
+            }
+            else if(root.data.dictionary.word > word)
+                this.findDefinitionImpl(root.left, word, callback);
+            else if(root.data.dictionary.word < word)
+                this.findDefinitionImpl(root.right, word, callback);
+        }
+        else {
+            callback(null)
+        }
     }
 }
 

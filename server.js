@@ -7,8 +7,23 @@
 // Showing the word
 // console.log('The word you choose was: ' + word + '!\n');
 
+const LinkedList = require('./Classes/LinkedList')
 const Translator = require('./Classes/Translator')
 
 const translator = new Translator();
 
-translator.loadDictionary('./Database/dicionario.dat');
+translator.loadDictionary('./Database/dicionario.dat').then(() => {
+    main()
+    // const linkedList = new LinkedList();
+    // linkedList.insertAtEnd('água')
+    
+    // translator.insertTranslation('water', linkedList)
+    
+    // translator.translateWord('')
+});
+
+
+function main() {
+    console.log('Ready to translate')
+    translator.translateWord('asdsad')
+}
