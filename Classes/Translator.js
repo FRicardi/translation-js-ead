@@ -47,17 +47,21 @@ class Translator {
      * Translates the word from english to portuguese
      * @param { String } word 
      */
-    async translateWord(word) {
-        console.log(`Translating '${word}'`)
-        const definitions = await this.avl.findDefinitionsByWord(word)
-        if(definitions){
-            console.log(`Translations for '${word}':`)
-            for (let i = 0; i < definitions.getListSize; i++) {
-                console.log("  " + i + " - " + definitions.getAt(i).data)
+    translateWord(word) {
+        return new Promise(async (resolve, reject) => {
+            console.log(`Translating '${word}'`)
+            const definitions = await this.avl.findDefinitionsByWord(word)
+            if(definitions){
+                console.log(`Translations for '${word}':`)
+                for (let i = 0; i < definitions.getListSize; i++) {
+                    console.log("  " + i + " - " + definitions.getAt(i).data)
+                }
+                resolve()
+            } else {
+                console.log(`Couldn't find any translations for ${word}.`)
+                reject()
             }
-        } else {
-            console.log(`Couldn't find any translations for ${word}.`)
-        }
+        })
     }
 
     /**
