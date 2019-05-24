@@ -6,6 +6,12 @@ class AVL {
 
     constructor() {
         this.root = null;
+        this.text = ''
+    }
+
+    get getText() {
+        this.stringAVLInOrder()
+        return this.text;
     }
 
     get getTreeRoot() {
@@ -120,6 +126,25 @@ class AVL {
             this.readInOrderImpl(root.right);
         }
         return;
+    }
+
+    stringAVLInOrder() {
+        this.text = ''
+        this.stringAVLInOrderImpl(this.root)
+    }
+
+    stringAVLInOrderImpl(root) {
+        if (root) {
+            this.stringAVLInOrderImpl(root.left);
+            let listText = ''
+            for (var i = 0; i < root.data.dictionary.definitions.getListSize; i ++) {
+                var def = root.data.dictionary.definitions.getAt(i)
+                listText += `#${def.data}`
+            }
+            this.text += `${root.data.dictionary.word}${listText}\n`
+            this.stringAVLInOrderImpl(root.right);
+        }
+        return
     }
 
     findDefinitionsByWord (word) {

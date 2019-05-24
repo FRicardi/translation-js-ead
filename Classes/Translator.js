@@ -1,5 +1,5 @@
 const fileSystem = require('fs');
-const readline = require('readline');  
+const readline = require('readline');
 
 const Dictionary = require('./Dictionary')
 const LinkedList = require('./LinkedList')
@@ -75,11 +75,14 @@ class Translator {
     }
 
     /**
-     * Saves the AVL tree to the file
-     * @param { String } file 
+     * Saves the AVL tree to the dictionary
+     *
      */
-    saveDictionary(file) {
-
+    saveDictionary() {
+        fileSystem.writeFile('./Database/dicionario.dat', this.avl.getText, function (err) {
+            if (err) throw err;
+            console.log('File saved! Hope to see you soon!');
+        }); 
     }
 }
 
