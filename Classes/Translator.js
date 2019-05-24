@@ -20,7 +20,6 @@ class Translator {
      * @param { String } file 
      */
     loadDictionary(path) {
-        let that = this;
         return new Promise((resolve, reject) => {
             const readInterface = readline.createInterface({  
                 input: fileSystem.createReadStream(path),
@@ -35,8 +34,9 @@ class Translator {
                 }
     
                 const dictionary = new Dictionary(words[0],linkedList);
+                console.log('Loading words...')
                 this.avl.insert({dictionary})
-            }).on('close', function(line) {
+            }).on('close', function() {
                 console.log('Finished loading.')
                 resolve()
             });
